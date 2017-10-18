@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form action="admin_products_add.php" method="post" enctype="multipart/form-data">
+  sku:<br>
+  <input type="text" name="sku" value="123456">
+  <br>
+  name:<br>
+  <input type="text" name="name" value="royal blanket">
+  <br><br>
+  flat_value:<br>
+  <input type="text" name="flat_value" value="">
+  <br>
+  yard_value:<br>
+  <input type="text" name="yard_value" value="5.59">
+  <br><br>
+  stock:<br>
+  <input type="text" name="stock" value="25">
+  <br><br>
+  description:<br>
+  <input type="text" name="description" value="royal like blanket">
+  <br>
+  category:<br>
+  <input type="text" name="category" value="fabric">
+  <br><br>
+  tag_one:<br>
+  <input type="text" name="tag_one" value="silk">
+  <br>
+  tag_two:<br>
+  <input type="text" name="tag_two" value="soft">
+  <br><br>
+  color:<br>
+  <input type="text" name="color" value="red">
+  <br><br>
+  rating:<br>
+  <input type="text" name="rating" value="na">
+  <br><br>
+
+  <input type="file" name="myimage">
+ <input type="submit" name="submit_image" value="Upload">
+
+</form>
+
+<p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>
+
+<p>Notice that the value of the "First name" field will not be submitted, because the input element does not have a name attribute.</p>
+
+</body>
+</html>
