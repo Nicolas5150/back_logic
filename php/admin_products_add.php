@@ -6,7 +6,6 @@
 
   function attemptAdd () {
     $status = gatherProductInfo();
-    echo $status['statusCode'];
     if ($status['statusCode'] !== '200') {
       return (returnMessage($status['statusCode'], $status['statusMessage']));
     }

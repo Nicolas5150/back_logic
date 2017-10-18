@@ -6,7 +6,6 @@
 
   function attemptEdit () {
     $status = gatherProductInfo();
-    echo $status['statusCode'];
     if ($status['statusCode'] !== '200') {
       return (returnMessage($status['statusCode'], $status['statusMessage']));
     }
@@ -27,15 +26,8 @@
       return (returnMessage($status['statusCode'], $status['statusMessage']));
     }
 
-    // Cereate relational table based on the product just added.
-    // Send valid data to the products table
-    $status = createRelatedReview($formFields[0][2]);
-    if ($status['statusCode'] !== '200') {
-      return (returnMessage($status['statusCode'], $status['statusMessage']));
-    }
-
     $status['statusCode'] = '200';
-    $status['statusMessage'] ='All accounts created';
+    $status['statusMessage'] ='Product Updated';
     return (returnMessage($status['statusCode'], $status['statusMessage']));
   }
 
@@ -84,7 +76,7 @@
       }
     }
 
-    // Only one value should be filled in not both.
+    // Either flat value or yard value needs to be filled in - not both.
     if (isset($_POST[$formFields[2][0]]) && !empty($_POST[$formFields[2][0]]) &&
       isset($_POST[$formFields[3][0]]) && !empty($_POST[$formFields[3][0]])) {
       array_push($accountIssues, 'Both yard and flat values set');
@@ -132,40 +124,43 @@
   // With all data finally cleaned and passed of all tests, add to the database.
   function productInfoToProductsDatabase ($formFields) {
     $conn = connectToDatabase();
-    // Check for a duplicate in the database prior to adding.
-    if (productExists($formFields[0][2], $conn)) {
+    $sku = $formFields[0][2];
+
+    // Check to make sure product exists in the database prior to adding.
+    if (productExists($sku, $conn)) {
+
+      // Obtain the latest image pathway for the product for comparison.
+      $sql = "SELECT image FROM products WHERE sku='".$sku."' ";
+      $result = $conn->query($sql);
+      $row = mysqli_fetch_array($result);
 
       // Needed for tracking and moving picture to the database.
+      // If the upload is the same or non existant, keep the original img link.
       // http://talkerscode.com/webtricks/upload%20image%20to%20database%20and%20server%20using%20HTML,PHP%20and%20MySQL.php
-      if ($_FILES["myimage"]["name"] != '') {
+      if ($_FILES["myimage"]["name"] != '' || $_FILES["myimage"]["name"] != $row['image']) {
         $upload_image = $_FILES["myimage"]["name"];
         $folder = "/Applications/XAMPP/xamppfiles/htdocs/back_logic/img/";
         $imagePath = $folder.$upload_image;
       }
 
-      // Keep the image the same
       else {
-        $imagePath = "/Applications/XAMPP/xamppfiles/htdocs/back_logic/img/";
+        $imagePath = $row['image'];
       }
 
-      $sql = "UPDATE `products` SET
-        sku={$formFields[0][2]},
-        name={$formFields[1][2]},
-        image=$imagePath,
-        price={$formFields[2][2]},
-        flat_value={$formFields[3][2]},
-        yard_value={$formFields[4][2]},
-        description={$formFields[5][2]},
-        category={$formFields[6][2]},
-        tag_one={$formFields[7][2]},
-        tag_two={$formFields[8][2]},
-        color={$formFields[9][2]},
-        rating={$formFields[10][2]},
-        WHERE `sku`= {$formFields[0][2]}";
-
-        echo "<br/>";
-        echo $sql;
-
+      $sql = "UPDATE products SET
+        sku='{$formFields[0][2]}',
+        name='{$formFields[1][2]}',
+        image='$imagePath',
+        flat_value='{$formFields[2][2]}',
+        yard_value='{$formFields[3][2]}',
+        stock='{$formFields[4][2]}',
+        description='{$formFields[5][2]}',
+        category='{$formFields[6][2]}',
+        tag_one='{$formFields[7][2]}',
+        tag_two='{$formFields[8][2]}',
+        color='{$formFields[9][2]}',
+        rating='{$formFields[10][2]}'
+        WHERE sku= '{$formFields[0][2]}'";
 
       // If query is valid return 200 and move the image to the img directory
       if ($conn->query($sql) === TRUE) {
@@ -186,7 +181,7 @@
 
     else {
       $status['statusCode'] = '406';
-      $status['statusMessage'] = 'product found already';
+      $status['statusMessage'] = 'Sku not found';
     }
 
     return $status;

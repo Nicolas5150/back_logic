@@ -152,10 +152,6 @@
     $sql = "INSERT INTO `".$table."` (username, review)
       VALUES ('".$formFields[0][2]."', '".$formFields[2][2]."')";
 
-      echo '<br/>';
-      echo $sql;
-      echo '<br/>';
-
     // If query is valid return 200 and move the image to the img directory
     if ($conn->query($sql) === TRUE) {
       $status['statusCode'] = '200';
