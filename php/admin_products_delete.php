@@ -88,8 +88,15 @@
   // When finished or broken out of code, send back response to request.
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
   function returnMessage ($statusCode, $statusMessage) {
-    var_dump($statusCode);
-    var_dump($statusMessage);
+    // var_dump($statusCode);
+    // var_dump($statusMessage);
+
+    $data = array(
+    "status" => $statusCode,
+    "statusMessage" => $statusMessage
+    );
+
+    echo json_encode($data);
   }
 
 ?>

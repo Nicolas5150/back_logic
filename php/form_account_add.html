@@ -2,7 +2,7 @@
 <html>
 <body>
 
-<form action="account_register.php" method="post">
+<form action="#" method="post" id="form-account-register-data">
   username:<br>
   <input type="text" name="username" value="test3">
   <br>
@@ -33,12 +33,14 @@
   state:<br>
   <input type="text" name="state" value="FL">
   <br><br>
-  <input type="submit" value="Submit">
+  <input type="button" value="Submit" id="form-account-register-btn">
 </form>
 
 <p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>
 
 <p>Notice that the value of the "First name" field will not be submitted, because the input element does not have a name attribute.</p>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="../js/submit_data.js"></script>
 </body>
 </html>

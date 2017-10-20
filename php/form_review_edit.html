@@ -2,7 +2,7 @@
 <html>
 <body>
 
-<form action="admin_review_edit.php" method="post">
+<form action="#" method="post" id="form-review-edit-data">
   username:<br>
   <input type="text" name="username" value="test3">
   <br>
@@ -15,12 +15,14 @@
   review:<br>
   <input type="text" name="review" value="great product">
   <br>
-  <input type="submit" value="Submit">
+  <input type="button" value="Submit" id="form-review-edit-btn">
 </form>
 
 <p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>
 
 <p>Notice that the value of the "First name" field will not be submitted, because the input element does not have a name attribute.</p>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="../js/submit_data.js"></script>
 </body>
 </html>

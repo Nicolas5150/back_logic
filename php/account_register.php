@@ -181,7 +181,7 @@
     $tableName = 'cart_'.$username;
     $sql = "CREATE TABLE $tableName (
       sku VARCHAR(120) PRIMARY KEY,
-      yard_amount VARCHAR(120),
+      amount VARCHAR(120),
       yard_value VARCHAR(120),
       flat_value VARCHAR(120)
     )";
@@ -208,7 +208,7 @@
     $sql = "CREATE TABLE $tableName (
       order_number VARCHAR(120) PRIMARY KEY,
       sku VARCHAR(120) NOT NULL,
-      yard_amount VARCHAR(120),
+      amount VARCHAR(120),
       yard_value VARCHAR(120),
       flat_value VARCHAR(120)
     )";
@@ -229,8 +229,15 @@
   // When finished or broken out of code, send back response to request.
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
   function returnMessage ($statusCode, $statusMessage) {
-    var_dump($statusCode);
-    var_dump($statusMessage);
+    // var_dump($statusCode);
+    // var_dump($statusMessage);
+
+    $data = array(
+    "status" => $statusCode,
+    "statusMessage" => $statusMessage
+    );
+
+    echo json_encode($data);
   }
 
 ?>
