@@ -96,8 +96,6 @@
       $status['statusCode'] = '400';
     }
 
-    print_r($_FILES);
-
     if ($_FILES["myimage"]["name"] == '') {
       array_push($accountIssues, 'File is not included');
       $status['statusCode'] = '400';

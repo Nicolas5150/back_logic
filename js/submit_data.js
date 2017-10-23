@@ -20,6 +20,26 @@ window.onload = function () {
       });
   });
 
+  $( "#form-account-validate-btn" ).click(function() {
+      $.ajax({
+        type: 'POST',
+        url: 'account_validate.php',
+        data: $('#form-account-validate-data').serialize(),
+        success: function (returnedData) {
+
+          // Raw returned JSON
+          console.log(returnedData);
+          // How to get a specific value from the returned data object
+          var data = jQuery.parseJSON(returnedData);
+          console.log(data.status);
+
+          // Code to send the user to a new page when need be.
+          // similar behavior as an HTTP redirect
+          // window.location.replace("http://stackoverflow.com");
+        }
+      });
+  });
+
   // Delete the user.
   $( "#form-account-delete-btn" ).click(function() {
       $.ajax({
@@ -111,13 +131,64 @@ window.onload = function () {
   });
 
   // Add product product as an upper level account.
-  $( "#form-product-add-btn" ).click(function() {
-    // var formElement = document.forms['myform'].elements['username'].value;
-    // console.log(formElement);
+  // http://codejaxy.com/q/1064709/javascript-jquery-ajax-forms-how-to-upload-image-and-text-using-ajax-and-php
+  $("form#form-product-add-data").submit(function(e){
+    e.preventDefault();
+     var formData = new FormData(this);
       $.ajax({
         type: 'POST',
         url: 'admin_products_add.php',
-        data: $('#form-product-add-data').serialize(),
+        processData: false,
+        contentType: false,
+        data: formData,
+        success: function (returnedData) {
+
+          // Raw returned JSON
+          console.log(returnedData);
+          // How to get a specific value from the returned data object
+          var data = jQuery.parseJSON(returnedData);
+          console.log(data.status);
+
+          // Code to send the user to a new page when need be.
+          // similar behavior as an HTTP redirect
+          // window.location.replace("http://stackoverflow.com");
+        }
+      });
+  });
+
+
+    // Add product product as an upper level account.
+    // http://codejaxy.com/q/1064709/javascript-jquery-ajax-forms-how-to-upload-image-and-text-using-ajax-and-php
+    $("form#form-product-edit-data").submit(function(e){
+      e.preventDefault();
+       var formData = new FormData(this);
+        $.ajax({
+          type: 'POST',
+          url: 'admin_products_edit.php',
+          processData: false,
+          contentType: false,
+          data: formData,
+          success: function (returnedData) {
+
+            // Raw returned JSON
+            console.log(returnedData);
+            // How to get a specific value from the returned data object
+            var data = jQuery.parseJSON(returnedData);
+            console.log(data.status);
+
+            // Code to send the user to a new page when need be.
+            // similar behavior as an HTTP redirect
+            // window.location.replace("http://stackoverflow.com");
+          }
+        });
+    });
+
+  // Delete product as an upper level acct.
+  $( "#form-product-delete-btn" ).click(function() {
+      $.ajax({
+        type: 'POST',
+        url: 'admin_products_delete.php',
+        data: $('#form-product-delete-data').serialize(),
         success: function (returnedData) {
 
           // Raw returned JSON
@@ -134,11 +205,10 @@ window.onload = function () {
   });
 
   // Delete product as an upper level acct.
-  $( "#form-product-delete-btn" ).click(function() {
+  $( "#select-products-all-btn" ).click(function() {
       $.ajax({
         type: 'POST',
-        url: 'admin_products_delete.php',
-        data: $('#form-product-delete-data').serialize(),
+        url: 'select_products_all.php',
         success: function (returnedData) {
 
           // Raw returned JSON
