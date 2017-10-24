@@ -224,7 +224,7 @@ window.onload = function () {
       });
   });
 
-  // Select all products from the database.
+  // Select all reviews for said product from the database.
   $( "#from-products-review-btn" ).click(function() {
       $.ajax({
         type: 'POST',

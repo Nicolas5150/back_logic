@@ -1,4 +1,5 @@
 <?php
+  session_start();
   require('connection_info.php');
 
   attemptValidation();
@@ -26,6 +27,21 @@
     if ($status['statusCode'] !== '200') {
       return (returnMessage($status['statusCode'], $status['statusMessage']));
     }
+
+    // session for a signed in user
+    $_SESSION["userActLevel"] == "user";
+    $_SESSION['username'] = $formFields[0][2];
+
+    // Case where a super user or admin has logged in
+    if ($formFields[0][2] == "Super") {
+      $_SESSION["userActLevel"] = "super";
+      $_SESSION['username'] = $formFields[0][2];
+    }
+    else if ($formFields[0][2] == "Admin") {
+      $_SESSION["userActLevel"] = "admin";
+      $_SESSION['username'] = $formFields[0][2];
+    }
+
 
     $status['statusCode'] = '200';
     $status['statusMessage'] ='Username and password match';

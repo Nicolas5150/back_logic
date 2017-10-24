@@ -1,4 +1,5 @@
 <?php
+  session_start();
   require('connection_info.php');
 
   attemptRegister();
@@ -38,6 +39,9 @@
     if ($status['statusCode'] !== '200') {
       return (returnMessage($status['statusCode'], $status['statusMessage']));
     }
+
+    $_SESSION['userActLevel'] = "user";
+    $_SESSION['username'] = $formFields[0][2];
 
     $status['statusCode'] = '200';
     $status['statusMessage'] ='All accounts created';
