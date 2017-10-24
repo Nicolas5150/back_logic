@@ -9,18 +9,8 @@
   // $data = attemptProductsAll();
   // $productData = $data['productData'];
   // foreach ($productData as $individualProduct) {
-  // echo "sku: {$individualProduct['sku']}<br />"
-  //    . "name: {$individualProduct['name']}<br />"
-  //    . "image: {$individualProduct['image']}<br />"
-  //    . "flat_value: {$individualProduct['flat_value']}<br />"
-  //    . "yard_value: {$individualProduct['yard_value']}<br />"
-  //    . "stock: {$individualProduct['stock']}<br />"
-  //    . "description: {$individualProduct['description']}<br />"
-  //    . "category: {$individualProduct['category']}<br />"
-  //    . "tag_one: {$individualProduct['tag_one']}<br />"
-  //    . "tag_two: {$individualProduct['tag_two']}<br />"
-  //    . "color: {$individualProduct['color']}<br />"
-  //    . "rating: {$individualProduct['rating']}<br /><br />";
+  // echo "sku: {$individualProduct['username']}<br />"
+  //    . "rating: {$individualProduct['review']}<br /><br />";
   //  }
 
 

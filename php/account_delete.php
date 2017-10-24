@@ -189,6 +189,8 @@
 
     function deleteReviewsOnProducts($username) {
       $conn = connectToDatabase();
+      $status['statusCode'] = '200';
+      $status['statusMessage'] = 'No reviews deleted';
 
       $result = mysqli_query($conn, "SELECT sku FROM products");
       if ($result) {
@@ -200,13 +202,9 @@
             $status['statusCode'] = '200';
             $status['statusMessage'] = 'Review deleted successfully';
           }
-
-          else {
-            $status['statusCode'] = '400';
-            $status['statusMessage'] = $conn->error;
-          }
         }
       }
+
 
       else {
         $status['statusCode'] = '400';
