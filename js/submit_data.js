@@ -204,11 +204,32 @@ window.onload = function () {
       });
   });
 
-  // Delete product as an upper level acct.
+  // Select all products from the database.
   $( "#select-products-all-btn" ).click(function() {
       $.ajax({
         type: 'POST',
         url: 'select_products_all.php',
+        success: function (returnedData) {
+
+          // Raw returned JSON
+          console.log(returnedData);
+          // How to get a specific value from the returned data object
+          var data = jQuery.parseJSON(returnedData);
+          console.log(data.status);
+
+          // Code to send the user to a new page when need be.
+          // similar behavior as an HTTP redirect
+          // window.location.replace("http://stackoverflow.com");
+        }
+      });
+  });
+
+  // Select all products from the database.
+  $( "#from-products-review-btn" ).click(function() {
+      $.ajax({
+        type: 'POST',
+        data: $('#form-products-review-data').serialize(),
+        url: 'select_products_review.php',
         success: function (returnedData) {
 
           // Raw returned JSON
